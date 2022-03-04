@@ -11,7 +11,7 @@ inputs:
     description: "Set to [env.GITHUB_REPOSITORY]."
     required: true
   GITHUB_TOKEN:
-    description: "Set to [env.GITHUB_TOKEN]."
+    description: "Set to [secrets.GITHUB_TOKEN]."
     required: true
   TO_STEP:
     description: "The step number to go to next."
