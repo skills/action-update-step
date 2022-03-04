@@ -1,0 +1,23 @@
+name: "Update step"
+description: "Update the course repository when the learner completes a step."
+inputs:
+  BRANCH_NAME:
+    description: "If the learner is working in a branch, add the branch name."
+    required: false
+  FROM_STEP:
+    description: "Requires the STEP file set to FROM_STEP."
+    required: true
+  GITHUB_REPOSITORY:
+    description: "Set to [env.GITHUB_REPOSITORY]."
+    required: true
+  GITHUB_TOKEN:
+    description: "Set to [env.GITHUB_TOKEN]."
+    required: true
+  TO_STEP:
+    description: "The step number to go to next."
+    required: true
+runs:
+  using: composite
+  steps:
+    - run: update-step.sh
+      shell: bash
