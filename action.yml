@@ -21,6 +21,23 @@ runs:
   steps:
     - shell: bash
       run: |
+        echo "Check that all required env variables are set"
+        if [ -z "$TO_STEP" ]
+        then
+          echo "TO_STEP is unset or set to the empty string"
+          exit 1
+        fi
+        if [ -z "$FROM_STEP" ]
+        then
+          echo "FROM_STEP is unset or set to the empty string"
+          exit 1
+        fi
+        if [ -z "$GITHUB_TOKEN" ]
+        then
+          echo "GITHUB_TOKEN is unset or set to the empty string"
+          exit 1
+        fi
+      
         echo "Check that we are on FROM_STEP"
         if [ "$(cat .github/script/STEP)" != $FROM_STEP ]
         then
