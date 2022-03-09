@@ -23,6 +23,8 @@
 # git tag --force v1 v1.2.2
 # git push --force --tags
 # ```
+#
+# Any questions? Ping @gr2m
 
 name: 🚀 Release
 "on":
