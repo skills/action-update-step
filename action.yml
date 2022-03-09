@@ -1,21 +1,17 @@
 name: "Update step"
 description: "Update the course repository when the learner completes a step."
 inputs:
-  BRANCH_NAME:
-    description: "If the learner is working in a branch, add the branch name."
-    required: false
-  FROM_STEP:
-    description: "Requires the STEP file set to FROM_STEP."
-    required: true
-  GITHUB_REPOSITORY:
-    description: "Set to [env.GITHUB_REPOSITORY]."
-    required: true
-  GITHUB_TOKEN:
+  token:
     description: "Set to [secrets.GITHUB_TOKEN]."
     required: true
-  TO_STEP:
+  from_step:
+    description: "Requires the STEP file set to FROM_STEP."
+    required: true
+  to_step:
     description: "The step number to go to next."
     required: true
+  branch_name:
+    description: "If the learner is working in a branch, add the branch name."
 runs:
   using: composite
   steps:
@@ -37,7 +33,7 @@ runs:
           echo "GITHUB_TOKEN is unset or set to the empty string"
           exit 1
         fi
-      
+
         echo "Check that we are on FROM_STEP"
         if [ "$(cat .github/script/STEP)" != $FROM_STEP ]
         then
@@ -74,3 +70,8 @@ runs:
         else
           echo "Branch $BRANCH_NAME does not exist"
         fi
+      env:
+        GITHUB_TOKEN: ${{ inputs.token }}
+        FROM_STEP: ${{ inputs.from_step }}
+        TO_STEP: ${{ inputs.to_step }}
+        BRANCH_NAME: ${{ inputs.branch_name }}
