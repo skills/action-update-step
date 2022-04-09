@@ -2,7 +2,7 @@
 
 Action step: Update the course repository when the learner completes a step.
 
-_This is not a course._ Visit https://github.com/githublearn to view our courses.
+_This is not a course._ Visit https://github.com/skills to view our courses.
 
 ### Example use
 
