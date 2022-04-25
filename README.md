@@ -21,7 +21,7 @@ jobs:
         with:
           fetch-depth: 0 # Let's get all the branches
       - name: Update to step 1
-        uses: githublearn/action-update-step@v1
+        uses: skills/action-update-step@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           from_step: 0
