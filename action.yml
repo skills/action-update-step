@@ -13,7 +13,7 @@ inputs:
   branch_name:
     description: "If the learner is working in a branch, add the branch name."
   base_branch_name:
-    description: "Option name of the base branch (default: main)."
+    description: "Optional name of the base branch (default: main)."
     required: false
     default: "main"
 runs:
