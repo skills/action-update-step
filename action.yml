@@ -87,3 +87,4 @@ runs:
         FROM_STEP: ${{ inputs.from_step }}
         TO_STEP: ${{ inputs.to_step }}
         BRANCH_NAME: ${{ inputs.branch_name }}
+        BASE_BRANCH_NAME: ${{ inputs.base_branch_name }}
