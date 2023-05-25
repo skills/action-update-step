@@ -45,7 +45,7 @@ runs:
         fi
 
         echo "Check that we are on FROM_STEP"
-        if [ "$(cat .github/script/STEP)" != $FROM_STEP ]
+        if [ "$(cat .github/steps/-step.txt)" != $FROM_STEP ]
         then
           echo "Current step is not $FROM_STEP"
           exit 0
@@ -68,7 +68,7 @@ runs:
         git config user.name github-actions
         git config user.email github-actions@github.com
         git add README.md
-        git add .github/script/STEP
+        git add .github/steps/-step.txt
         git commit --message="Update to $TO_STEP in STEP and README.md"
         git push
 
