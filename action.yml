@@ -18,6 +18,12 @@ inputs:
     default: "main"
 runs:
   using: composite
+  env:
+    GITHUB_TOKEN: ${{ inputs.token }}
+    FROM_STEP: ${{ inputs.from_step }}
+    TO_STEP: ${{ inputs.to_step }}
+    BRANCH_NAME: ${{ inputs.branch_name }}
+    BASE_BRANCH_NAME: ${{ inputs.base_branch_name }}
   steps:
     - shell: bash
       run: |
@@ -48,22 +54,15 @@ runs:
         echo "Make sure we are on the base branch ($BASE_BRANCH_NAME)"
         git checkout $BASE_BRANCH_NAME
 
-        echo "Remove 'open' from any <details> tags"
-        sed -i.tmp -r 's/<details id=([0-9X]+) open>/<details id=\1>/g' README.md
+        echo "Update the step to TO_STEP"
+        NEXT_STEP=$(cat .github/steps/$TO_STEP-*.md)
+        HEADER=$(awk '/<header>/,/<\/header>/ { print }' README.md)
+        FOOTER=$(awk '/<footer>/,/<\/footer>/ { print }' README.md)
+        NEXT="$HEADER\n\n$NEXT_STEP\n\n$FOOTER"
+        echo $NEXT > README.md
 
-        echo "Add 'open' to step TO_STEP"
-        sed -i.tmp -r "s/<details id=$TO_STEP>/<details id=$TO_STEP open>/g" README.md
-
-        echo "Update all HTML comments to hide everything"
-        sed -i.tmp -r 's/<!--step([0-9X]+)-->/<!--step\1/g' README.md
-        sed -i.tmp -r 's/<!--endstep([0-9X]+)-->/endstep\1-->/g' README.md
-
-        echo "Show the current TO_STEP"
-        sed -i.tmp -r "s/<\!--step$TO_STEP/<\!--step$TO_STEP-->/g" README.md
-        sed -i.tmp -r "s/endstep$TO_STEP-->/<\!--endstep$TO_STEP-->/g" README.md
-
-        echo "Update the STEP file to TO_STEP"
-        echo "$TO_STEP" > .github/script/STEP
+        echo "Update step file to TO_STEP"
+        echo "$TO_STEP" > .github/steps/-step.txt
 
         echo "Commit the files, and push to base branch"
         git config user.name github-actions
@@ -82,9 +81,3 @@ runs:
         else
           echo "Branch $BRANCH_NAME does not exist"
         fi
-      env:
-        GITHUB_TOKEN: ${{ inputs.token }}
-        FROM_STEP: ${{ inputs.from_step }}
-        TO_STEP: ${{ inputs.to_step }}
-        BRANCH_NAME: ${{ inputs.branch_name }}
-        BASE_BRANCH_NAME: ${{ inputs.base_branch_name }}
