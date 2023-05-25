@@ -58,8 +58,7 @@ runs:
         NEXT_STEP=$(cat .github/steps/$TO_STEP-*.md)
         HEADER=$(awk '/<header>/,/<\/header>/ { print }' README.md)
         FOOTER=$(awk '/<footer>/,/<\/footer>/ { print }' README.md)
-        NEXT="$HEADER\n\n$NEXT_STEP\n\n$FOOTER"
-        echo "$NEXT" > README.md
+        echo "$HEADER\n\n$NEXT_STEP\n\n$FOOTER" > README.md
 
         echo "Update step file to TO_STEP"
         echo "$TO_STEP" > .github/steps/-step.txt
