@@ -18,14 +18,14 @@ inputs:
     default: "main"
 runs:
   using: composite
-  env:
-    GITHUB_TOKEN: ${{ inputs.token }}
-    FROM_STEP: ${{ inputs.from_step }}
-    TO_STEP: ${{ inputs.to_step }}
-    BRANCH_NAME: ${{ inputs.branch_name }}
-    BASE_BRANCH_NAME: ${{ inputs.base_branch_name }}
   steps:
     - shell: bash
+      env:
+        GITHUB_TOKEN: ${{ inputs.token }}
+        FROM_STEP: ${{ inputs.from_step }}
+        TO_STEP: ${{ inputs.to_step }}
+        BRANCH_NAME: ${{ inputs.branch_name }}
+        BASE_BRANCH_NAME: ${{ inputs.base_branch_name }}
       run: |
         echo "Check that all required env variables are set"
         if [ -z "$TO_STEP" ]
