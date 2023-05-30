@@ -19,7 +19,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0 # Let's get all the branches
+          fetch-depth: 0 # Let's get all the branches.
       - name: Update to step 1
         uses: skills/action-update-step@v2
         with:
