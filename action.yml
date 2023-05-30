@@ -5,7 +5,7 @@ inputs:
     description: "Set to [secrets.GITHUB_TOKEN]."
     required: true
   from_step:
-    description: "Requires the STEP file set to FROM_STEP."
+    description: "Requires the -step.txt file set to FROM_STEP."
     required: true
   to_step:
     description: "The step number to go to next."
