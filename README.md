@@ -7,7 +7,7 @@ _This is not a course._ Visit https://github.com/skills to view our courses.
 ### Example use
 
 ```yml
-name: Step 0, Start
+name: Step 0, Welcome
 on: push
 permissions:
   contents: write
