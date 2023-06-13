@@ -55,7 +55,7 @@ runs:
         git checkout $BASE_BRANCH_NAME
 
         echo "Update the step to TO_STEP"
-        NEXT_STEP=$(cat .github/steps/$TO_STEP-*.md)
+        NEXT_STEP=$(cat .github/steps/[$TO_STEP]-*.md)
         HEADER=$(awk '/<header>/,/<\/header>/' README.md)
         FOOTER=$(awk '/<footer>/,/<\/footer>/' README.md)
         echo -e "$HEADER\n\n$NEXT_STEP\n\n$FOOTER" > README.md
