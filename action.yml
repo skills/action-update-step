@@ -44,15 +44,15 @@ runs:
           exit 1
         fi
 
+        echo "Make sure we are on the base branch ($BASE_BRANCH_NAME)"
+        git checkout $BASE_BRANCH_NAME
+
         echo "Check that we are on FROM_STEP"
         if [ "$(cat .github/steps/-step.txt)" != $FROM_STEP ]
         then
           echo "Current step is not $FROM_STEP"
           exit 0
         fi
-
-        echo "Make sure we are on the base branch ($BASE_BRANCH_NAME)"
-        git checkout $BASE_BRANCH_NAME
 
         echo "Update the step to TO_STEP"
         NEXT_STEP=$(cat .github/steps/[$TO_STEP]-*.md)
