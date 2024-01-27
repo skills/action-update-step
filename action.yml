@@ -64,8 +64,8 @@ runs:
         echo "$TO_STEP" > .github/steps/-step.txt
 
         echo "Commit the files, and push to base branch"
-        git config user.name github-actions
-        git config user.email github-actions@github.com
+        git config user.name github-actions[bot]
+        git config user.email github-actions[bot]@users.noreply.github.com
         git add README.md
         git add .github/steps/-step.txt
         git commit --message="Update to $TO_STEP in STEP and README.md"
